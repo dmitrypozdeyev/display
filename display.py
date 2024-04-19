@@ -22,11 +22,13 @@ class Display:
         self.serial.write(f't{self.strings[0]}{self.strings[1]}{self.strings[2]}{self.strings[3]}'.encode())
         if self.debug:
             print(f't{self.strings[0]}/n{self.strings[1]}/n{self.strings[2]}/n{self.strings[3]}')
+        return self.serial.readline() == b'ok\r\n'
     def set_str(self, string, line=0):
         self.strings[line] = string + " " * (20 - len(string))
     def echo(self):
         self.serial.write("e".encode())
         return self.serial.readline() == b'ok\r\n'
-
-
+    def set_contrast(self, contrast):
+        self.serial.write(f'c{contrast}'.encode())
+        return self.serial.readline() == b'ok\r\n'
 

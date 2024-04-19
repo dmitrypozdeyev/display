@@ -46,7 +46,13 @@ void loop() {
     lcd.print(incoming_data.substring(41, 61));
     lcd.setCursor(0, 3);
     lcd.print(incoming_data.substring(61, 81));
+    Serial.println("ok");
   }
   if (incoming_data.substring(0,1) == "e") Serial.println("ok");
+  
+  if (incoming_data.substring(0,1) == "c"){
+    String contrast = incoming_data.substring(1, 3);  
+    analogWrite(V0, contrast.toInt());
+    Serial.println("ok"); 
   }
-
+}
